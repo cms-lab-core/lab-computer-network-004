@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="720" viewBox="0 0 1600 720" role="img" aria-labelledby="title description">
+  <title id="title">Lab 004 · три Linux-хоста и коммутатор</title>
+  <desc id="description">pc1, pc2 и pc3 соединены с отдельными портами bridge sw1. pc3 наблюдает flooded кадры. Интерфейсы eth0 используются только для management.</desc>
+  <rect width="1600" height="720" fill="#ffffff"/>
+  <style>
+    text {font-family:DejaVu Sans,Arial,sans-serif;fill:#17243b}
+    .title {font-size:35px;font-weight:700}
+    .sub {font-size:19px;fill:#59677c}
+    .name {font-size:27px;font-weight:700}
+    .node {fill:#f6f9ff;stroke:#315cd5;stroke-width:3}
+    .sw {fill:#ecf7f4;stroke:#27806a;stroke-width:3}
+    .wire {stroke:#315cd5;stroke-width:6;stroke-linecap:round}
+    .mono {font-family:DejaVu Sans Mono,monospace;font-size:17px}
+    .tag {fill:#eef2ff;stroke:#a9b8f7;stroke-width:1.2}
+  </style>
+  <text class="title" x="800" y="55" text-anchor="middle">Lab 004 · Где коммутатор выучил MAC?</text>
+  <text class="sub" x="800" y="94" text-anchor="middle">Три host и три порта: pc3 наблюдает flooding, предназначенный для pc2</text>
+
+  <line class="wire" x1="450" y1="270" x2="625" y2="270"/>
+  <line class="wire" x1="975" y1="270" x2="1150" y2="270"/>
+  <line class="wire" x1="800" y1="390" x2="800" y2="480"/>
+
+  <text class="mono" x="535" y="246" text-anchor="middle">sw1:eth1</text>
+  <text class="mono" x="1060" y="246" text-anchor="middle">sw1:eth2</text>
+  <text class="mono" x="822" y="454">sw1:eth3</text>
+
+  <rect class="node" x="65" y="180" width="385" height="210" rx="26"/>
+  <text class="name" x="258" y="232" text-anchor="middle">pc1 · sender</text>
+  <text class="mono" x="258" y="276" text-anchor="middle">10.4.0.10/24</text>
+  <text class="mono" x="258" y="315" text-anchor="middle">02:00:00:00:04:01</text>
+  <text class="sub" x="258" y="358" text-anchor="middle">eth1 → sw1:eth1</text>
+
+  <rect class="sw" x="625" y="165" width="350" height="225" rx="26"/>
+  <text class="name" x="800" y="216" text-anchor="middle">sw1 · Linux bridge</text>
+  <text class="mono" x="800" y="263" text-anchor="middle">br0 · L2 only</text>
+  <rect class="tag" x="658" y="290" width="284" height="67" rx="16"/>
+  <text class="sub" x="800" y="320" text-anchor="middle">FDB learns</text>
+  <text class="mono" x="800" y="345" text-anchor="middle">source MAC → port</text>
+
+  <rect class="node" x="1150" y="180" width="385" height="210" rx="26"/>
+  <text class="name" x="1342" y="232" text-anchor="middle">pc2 · destination</text>
+  <text class="mono" x="1342" y="276" text-anchor="middle">10.4.0.20/24</text>
+  <text class="mono" x="1342" y="315" text-anchor="middle">02:00:00:00:04:02</text>
+  <text class="sub" x="1342" y="358" text-anchor="middle">eth1 ← sw1:eth2</text>
+
+  <rect class="node" x="565" y="480" width="470" height="155" rx="26"/>
+  <text class="name" x="800" y="526" text-anchor="middle">pc3 · observer</text>
+  <text class="mono" x="800" y="562" text-anchor="middle">10.4.0.30/24 · 02:00:00:00:04:03</text>
+  <text class="sub" x="800" y="605" text-anchor="middle">eth1 фиксирует flooded unicast</text>
+
+  <text class="sub" x="800" y="687" text-anchor="middle">eth0 — management plane платформы; не изменяем его.</text>
+</svg>
